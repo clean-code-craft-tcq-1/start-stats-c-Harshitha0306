@@ -1,11 +1,11 @@
 define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
-#include <iostream>
+//#include <iostream>
 #include "catch.hpp"
 #include "decl.hpp"
 extern "C" {
 #include "stats.h"
 }
-using namespace std;
+//using namespace std;
 #include <stdlib.h>
 #include <math.h>
 
