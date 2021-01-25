@@ -2,9 +2,9 @@
 //#include <iostream>
 #include "catch.hpp"
 #include "decl.hpp"
-extern "C" {
+//extern "C" {
 #include "stats.h"
-}
+//}
 //using namespace std;
 #include <stdlib.h>
 #include <math.h>
