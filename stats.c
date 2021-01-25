@@ -5,7 +5,13 @@
 
 struct Stats compute_statistics(const float* numberset, int setlength) {
     struct Stats s;
-    
+    if(setlength == 0 && numberset == NULL)
+    {
+        s.average = NAN;
+        s.max = NAN;
+        s.min = NAN;
+        return s;
+    }
     int i;
     float minimum = numberset[0], maximum = numberset[0], sum=0;
     float avg =0;
@@ -25,15 +31,7 @@ struct Stats compute_statistics(const float* numberset, int setlength) {
     s.average = avg;
     s.min = minimum;
     s.max = maximum;
-
-    if(setlength==0)
-    {
-        s.average = NAN;
-        s.max = NAN;
-        s.min = NAN;
-        
-    }
-   return s;
+    return s;
 }
 
 int emailAlertCallCount = 0;
