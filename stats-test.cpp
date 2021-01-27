@@ -1,11 +1,8 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
-//#include <iostream>
+
 #include "catch.hpp"
 #include "decl.hpp"
-//extern "C" {
 #include "stats.h"
-//}
-//using namespace std;
 #include <stdlib.h>
 #include <math.h>
 
@@ -23,16 +20,17 @@ TEST_CASE("average is NaN for empty array") {
     Stats computedStats = compute_statistics(0, 0);
     //All fields of computedStats (average, max, min) must be
     //NAN (not-a-number), as defined in math.h
-    REQUIRE(isnan(computedStats.average));
-    REQUIRE(isnan(computedStats.max));
-    REQUIRE(isnan(computedStats.min));
     //Design the REQUIRE statement here.
     //Use https://stackoverflow.com/questions/1923837/how-to-use-nan-and-inf-in-c
+	REQUIRE(isnan(computedStats.average));
+    REQUIRE(isnan(computedStats.max));
+    REQUIRE(isnan(computedStats.min));
 }
 
 TEST_CASE("raises alerts when max is greater than threshold") {
     // create additional .c and .h files
     // containing the emailAlerter, ledAlerter functions
+	
     alerter_funcptr alerters[] = {emailAlerter, ledAlerter};
 
     float numberset[] = {99.8, 34.2, 4.5};
