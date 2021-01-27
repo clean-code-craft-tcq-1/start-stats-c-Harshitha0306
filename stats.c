@@ -6,9 +6,6 @@
 /* Defining a function which calculates average, maximum and minimum of an array*/
 struct Stats compute_statistics(const float* numberset, int setlength) {
     struct Stats s;
-	int i;
-    float f_max = numberset[0],f_min = numberset[0], f_sum = 0;
-    float f_avg = 0;
 	
 	/* Return NAN incase if input is an empty array(resulting in undefined behaviour)*/
     if(setlength == 0 && numberset == NULL)
@@ -18,6 +15,10 @@ struct Stats compute_statistics(const float* numberset, int setlength) {
         s.min = NAN;
         return s;
     }
+	
+    int i;
+    float f_max = numberset[0],f_min = numberset[0], f_sum = 0;
+    float f_avg = 0;
    
     for(i = 0;i < setlength;i++)
     {
