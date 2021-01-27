@@ -3,8 +3,14 @@
 #include "stats.h"
 #include "math.h"
 
+/* Defining a function which calculates average, maximum and minimum of an array*/
 struct Stats compute_statistics(const float* numberset, int setlength) {
     struct Stats s;
+	int i;
+    float f_max = numberset[0],f_min = numberset[0], f_sum = 0;
+    float f_avg = 0;
+	
+	/* Return NAN incase if input is an empty array(resulting in undefined behaviour)*/
     if(setlength == 0 && numberset == NULL)
     {
         s.average = NAN;
@@ -12,28 +18,28 @@ struct Stats compute_statistics(const float* numberset, int setlength) {
         s.min = NAN;
         return s;
     }
-    int i;
-    float minimum = numberset[0], maximum = numberset[0], sum=0;
-    float avg =0;
-    for(i=0;i<setlength;i++)
+   
+    for(i = 0;i < setlength;i++)
     {
-        if(numberset[i] > maximum)
+        if(numberset[i] > f_max)
         {
-            maximum=numberset[i];
+            f_max=numberset[i];
         }
-        if(numberset[i]<minimum)
+        if(numberset[i] < f_min)
         {
-            minimum=numberset[i];
+            f_min=numberset[i];
         }
-        sum =sum+numberset[i];
-        avg =sum/setlength;
+        f_sum =f_sum + numberset[i];
+        f_avg =f_sum / setlength;
     }
-    s.average = avg;
-    s.min = minimum;
-    s.max = maximum;
+    s.average = f_avg;
+	s.max = f_max;
+    s.min = f_min;
+	
     return s;
 }
 
+/* Functions returning call-counters on function call*/
 int emailAlertCallCount = 0;
 int ledAlertCallCount = 0;
 
@@ -46,7 +52,7 @@ void ledAlerter(void)
 {
     ledAlertCallCount = 1;
 }
-
+/*Functions raising alerts when max is greater than threshold*/
 void check_and_alert(float maxThreshold, alerter_funcptr alerters[], struct Stats computedStats)
 {
     if(computedStats.max > maxThreshold)
